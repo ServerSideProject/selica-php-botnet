@@ -1,5 +1,8 @@
 # selica-php-botnet
 
+![image](https://user-images.githubusercontent.com/90555583/169706841-77efbf0b-070c-40c8-aa8c-75eb555f8689.png)
+
+
 Запуск скрипта: python3 main.py
 
 Загрузить ботов: bots
