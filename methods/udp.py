@@ -28,6 +28,8 @@ try:
 		t.daemon = True
 		t.start()
 
+	time.sleep(int(timer))
+
 except IndexError:
 	print("Usage: python " + sys.argv[0] + " host port time packet_size threads")
 	print("Example: python "+sys.argv[0]+" 127.0.0.1 80 60 50000 10")
