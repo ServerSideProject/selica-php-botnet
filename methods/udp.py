@@ -24,7 +24,9 @@ try:
 	threads = sys.argv[5]
 	print(port)
 	for x in range(int(threads)):
-		threading.Thread(target=udpsender, args=(ip, port, timer, punch,)).start()
+		t = threading.Thread(target=udpsender, args=(ip, port, timer, punch,))
+		t.daemon = True
+		t.start()
 
 except IndexError:
 	print("Usage: python " + sys.argv[0] + " host port time packet_size threads")
